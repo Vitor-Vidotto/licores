@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva Vidotto - Cardápio de Licores</title>
+    <style>
+        /* Estilos Gerais */
+        body {
+            position: relative; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px; 
+            background-color: #3a2d27;
+            background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_wood.png');
+            background-repeat: repeat;
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ===== MUDANÇA AQUI (BOLHAS) ===== */
+        .floating-bubbles {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; overflow: hidden; 
+        }
+        .bubble {
+            position: absolute;
+            width: 140px; /* Aumentado */
+            height: 140px; /* Aumentado */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.4); /* Borda mais visível */
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            opacity: 0.6; /* Mais visível */
+            filter: blur(0); /* Sem blur */
+        }
+        .b1 { top: 150px; left: 5%; }
+        .b2 { top: 400px; right: 5%; }
+        .b3 { top: 750px; left: 8%; }
+        .b4 { top: 1100px; right: 10%; }
+        
+        /* Contêiner principal (invisível) */
+        .container {
+            position: relative; 
+            z-index: 2; /* Na frente das bolhas */
+            max-width: 1000px; 
+            margin: 20px auto;
+            overflow: hidden; 
+        }
+
+        /* Cabeçalho */
+        .header {
+            padding: 40px 30px;
+            background-color: #2c1e1a; 
+            color: #f0e6d2;
+            text-align: center;
+            border-radius: 8px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .header h1 { margin: 0; font-family: "Georgia", "Times New Roman", serif; font-size: 2.5rem; font-weight: 500; }
+        .header p { margin: 5px 0 0; font-size: 1.2rem; font-style: italic; opacity: 0.9; }
+
+        /* Seção principal com as colunas */
+        .main-content { 
+            display: flex; 
+            flex-wrap: wrap; 
+            padding: 0; 
+            margin-top: 30px; 
+            justify-content: space-around; 
+        }
+
+        /* Cada coluna de licor (MADEIRA CLARA) */
+        .category {
+            flex-basis: 280px; 
+            margin: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+            overflow: hidden;
+            background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/sanded_wood_@2x.png');
+        }
+        .category:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); transform: translateY(-5px); }
+
+        /* IMAGEM DA CATEGORIA */
+        .category-image { width: 100%; height: 220px; object-fit: cover; } 
+
+        /* Título de cada categoria */
+        .category-header { 
+            padding: 20px; 
+            text-align: center; 
+            border-bottom: 1px solid #c9c3ba; 
+        }
+        /* SEU AJUSTE DE COR MANTIDO */
+        .category-header h2 { margin: 0; font-family: "Georgia", serif; font-size: 1.8rem; color: #61433b; }
+        
+        .category-header .highlight { 
+            font-size: 1.1rem; 
+            font-style: italic; 
+            font-weight: 500;
+            color: #f0e6d2; 
+            margin-top: 5px; 
+            text-shadow: 
+                -1px -1px 1px #2c1e1a,  
+                 1px -1px 1px #2c1e1a,
+                -1px  1px 1px #2c1e1a,
+                 1px  1px 1px #2c1e1a,
+                 0 0 3px #2c1e1a;
+        }
+
+        /* Tabela de preços */
+        .price-list { width: 100%; border-collapse: collapse; }
+        .price-list tr { border-bottom: 1px solid #c9c3ba; } 
+        .price-list tr:last-child { border-bottom: none; }
+        .price-list td { padding: 15px 20px; }
+        
+        .price-list .size { 
+            font-weight: 600; 
+            font-size: 1rem;
+            color: #f0e6d2; 
+            text-shadow: 
+                -1px -1px 1px #2c1e1a,  
+                 1px -1px 1px #2c1e1a,
+                -1px  1px 1px #2c1e1a,
+                 1px  1px 1px #2c1e1a,
+                 0 0 3px #2c1e1a;
+        }
+        
+        .price-list .price { 
+            text-align: right; 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            color: #f0e6d2; 
+            text-shadow: 
+                -1px -1px 1px #2c1e1a,  
+                 1px -1px 1px #2c1e1a,
+                -1px  1px 1px #2c1e1a,
+                 1px  1px 1px #2c1e1a,
+                 0 0 3px #2c1e1a;
+        }
+        
+        /* Destaque especial */
+        .special-note {
+            padding: 20px;
+            background-color: rgba(240, 230, 210, 0.8); 
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #2c1e1a;
+        }
+        .special-note strong { display: block; font-size: 1.1rem; }
+
+        /* Rodapé */
+        .footer { 
+            text-align: center; 
+            padding: 30px; 
+            background-color: #f9f9f9; 
+            margin-top: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .footer p { margin: 0; font-size: 1.1rem; font-weight: 500; }
+        
+        /* ===== MUDANÇA AQUI (LINKS) ===== */
+        .footer .social { 
+            margin-top: 10px; 
+            font-size: 1rem; 
+        }
+        .footer .social a {
+            color: #555;
+            font-weight: 600;
+            text-decoration: none; /* Remove sublinhado */
+            transition: color 0.2s ease;
+        }
+        .footer .social a:hover {
+            color: #000; /* Escurece ao passar o mouse */
+        }
+        /* ===== FIM DA MUDANÇA ===== */
+
+
+        /* Ajustes para impressão (PDF) */
+        @media print {
+            body { background: #ffffff; padding: 0; position: static; }
+            .floating-bubbles { display: none; }
+            .container { box-shadow: none; margin: 0; max-width: 100%; border-radius: 0; }
+            .header, .footer { box-shadow: none; border-radius: 0; margin: 0; background: #f9f9f9; }
+            .category { background: #fafafa; box-shadow: none; transform: none; page-break-inside: avoid; }
+            .price-list .size, .price-list .price, .category-header .highlight { 
+                text-shadow: none; 
+                color: #000;
+            }
+            .special-note { background-color: #f0e6d2; }
+            /* Garante que os links fiquem visíveis na impressão */
+            .footer .social a { 
+                color: #555;
+                text-decoration: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="floating-bubbles">
+        <img src="1000162088.jpg" alt="Detalhe licor" class="bubble b1">
+        <img src="1000162092.jpg" alt="Detalhe licor" class="bubble b2">
+        <img src="1000162093.jpg" alt="Detalhe licor" class="bubble b3">
+        <img src="1000162094.jpg" alt="Detalhe licor" class="bubble b4">
+    </div>
+
+    <div class="container">
+        
+        <header class="header">
+            <h1>Reserva Vidotto</h1>
+            <p>A Essência do Sabor Artesanal</p>
+        </header>
+
+        <main class="main-content">
+
+            <section class="category">
+                <img src="1000162089.jpg" alt="Licores Clássicos" class="category-image">
+                <div class="category-header">
+                    <h2>Clássicos</h2>
+                    <div class="highlight">A tradição em cada gota.</div>
+                </div>
+                <table class="price-list">
+                    <tr><td class="size">50ml</td><td class="price">R$ 15</td></tr>
+                    <tr><td class="size">160ml</td><td class="price">R$ 25</td></tr>
+                    <tr><td class="size">500ml</td><td class="price">R$ 55</td></tr>
+                    <tr><td class="size">750ml</td><td class="price">R$ 75</td></tr>
+                </table>
+            </section>
+
+            <section class="category">
+                <img src="1000162090.jpg" alt="Licores Trufados" class="category-image">
+                <div class="category-header">
+                    <h2>Trufados</h2>
+                    <div class="highlight">Textura aveludada, sabor inesquecível.</div>
+                </div>
+                <table class="price-list">
+                    <tr><td class="size">50ml</td><td class="price">R$ 15</td></tr>
+                    <tr><td class="size">160ml</td><td class="price">R$ 35</td></tr>
+                    <tr><td class="size">500ml</td><td class="price">R$ 65</td></tr>
+                    <tr><td class="size">750ml</td><td class="price">R$ 95</td></tr>
+                </table>
+            </section>
+
+            <section class="category">
+                <img src="1000162091.jpg" alt="Licores Especiais" class="category-image">
+                <div class="category-header">
+                    <h2>Especiais</h2>
+                    <div class="highlight">A experiência premium.</div>
+                </div>
+                <table class="price-list">
+                    <tr><td class="size">50ml</td><td class="price">R$ 25</td></tr>
+                    <tr><td class="size">160ml</td><td class="price">R$ 45</td></tr>
+                    <tr><td class="size">375ml</td><td class="price">R$ 75</td></tr>
+                    <tr><td class="size">500ml</td><td class="price">R$ 85</td></tr>
+                    <tr><td class="size">750ml</td><td class="price">R$ 120</td></tr>
+                </table>
+                <div class="special-note">
+                    <strong>🎁 O Presente Perfeito 🎁</strong>
+                    Todos os Especiais incluem copinho!
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="footer">
+            <p>Faça seu pedido ou consulte sabores exclusivos!</p>
+            <div class="social">
+                <a href="https://www.instagram.com/reserva.vidotto" target="_blank">@reserva.vidotto</a>
+            </div>
+            <div class="social">
+                <a href="https://wa.me/5515998109786" target="_blank">+15 99810-9786 (Peça aqui!)</a>
+            </div>
+        </footer>
+        </div>
+
+</body>
+</html>
