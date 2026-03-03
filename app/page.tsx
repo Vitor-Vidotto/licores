@@ -44,7 +44,10 @@ export default function Home() {
               <div className="md:w-3/5 p-8 md:p-10 flex flex-col justify-center">
                 <div className="mb-6 border-b border-stone-800/50 pb-4">
                   <h2 className="font-serif text-3xl text-amber-50 mb-1">Clássicos</h2>
-                  <p className="text-stone-400 text-sm italic tracking-wide">A tradição em cada gota.</p>
+                  <p className="text-stone-400 text-sm italic tracking-wide mb-3">A tradição em cada gota.</p>
+                  <p className="text-stone-300 text-sm leading-relaxed">
+                    <span className="font-medium text-amber-200/80">Sabores:</span> Raízes, Maracujá, Morango, Maçã, Laranja com Canela, Figo, Cereja.
+                  </p>
                 </div>
                 <ul className="space-y-3">
                   <li className="flex justify-between items-center"><span className="text-stone-300">50ml</span><span className="font-semibold text-amber-100">R$ 15</span></li>
@@ -66,7 +69,10 @@ export default function Home() {
               <div className="md:w-3/5 p-8 md:p-10 flex flex-col justify-center">
                 <div className="mb-6 border-b border-stone-800/50 pb-4">
                   <h2 className="font-serif text-3xl text-amber-50 mb-1">Trufados</h2>
-                  <p className="text-stone-400 text-sm italic tracking-wide">Textura aveludada, sabor inesquecível.</p>
+                  <p className="text-stone-400 text-sm italic tracking-wide mb-3">Textura aveludada, sabor inesquecível.</p>
+                  <p className="text-stone-300 text-sm leading-relaxed">
+                    <span className="font-medium text-amber-200/80">Sabores:</span> Morango com Ninho, Chocolate Belga, Doce de Leite.
+                  </p>
                 </div>
                 <ul className="space-y-3">
                   <li className="flex justify-between items-center"><span className="text-stone-300">50ml</span><span className="font-semibold text-amber-100">R$ 15</span></li>
@@ -88,7 +94,10 @@ export default function Home() {
               <div className="md:w-3/5 p-8 md:p-10 flex flex-col justify-center">
                 <div className="mb-6 border-b border-stone-800/50 pb-4">
                   <h2 className="font-serif text-3xl text-amber-50 mb-1">Especiais</h2>
-                  <p className="text-stone-400 text-sm italic tracking-wide">A experiência premium.</p>
+                  <p className="text-stone-400 text-sm italic tracking-wide mb-3">A experiência premium.</p>
+                  <p className="text-stone-300 text-sm leading-relaxed">
+                    <span className="font-medium text-amber-200/80">Sabores:</span> Café com Jack Daniel's, Café com Cachaça Amadeirada, Coco ao Rum.
+                  </p>
                 </div>
                 <ul className="space-y-3 mb-6">
                   <li className="flex justify-between items-center"><span className="text-stone-300">50ml</span><span className="font-semibold text-amber-100">R$ 25</span></li>
