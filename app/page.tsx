@@ -94,7 +94,7 @@ export default function Home() {
               <div className="md:w-3/5 p-8 md:p-10 flex flex-col justify-center">
                 <div className="mb-6 border-b border-stone-800/50 pb-4">
                   <h2 className="font-serif text-3xl text-amber-50 mb-1">Especiais</h2>
-                  <p className="text-stone-400 text-sm italic tracking-wide mb-3">A experiência premium.</p>
+                  <p className="text-stone-400 text-sm italic tracking-wide mb-3">A verdadeira experiência premium.</p>
                   <p className="text-stone-300 text-sm leading-relaxed">
                     <span className="font-medium text-amber-200/80">Sabores:</span> Café com Jack Daniel's, Café com Cachaça Amadeirada, Coco ao Rum, Mel com Baunilha, Avelã e Rum.
                   </p>
